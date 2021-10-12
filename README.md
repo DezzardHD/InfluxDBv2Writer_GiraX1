@@ -12,7 +12,7 @@ Currently data of type *Number* or *Binary* is supported.
 5. Now specify the number of *Inputs* you want to use.
 6. Last but not least you'll have to configure each Input as followed<br/>
 `measurementName,tagKey1=tagValue,tagKey2=tagValue,...,tagKeyX=tagValue fieldKey1,fieldKey2,...,fieldKeyX`
-<br/>
+
 **measurementName**    choose name of the value for *_measurement*<br/>
 **tagKey=tagValue**    car=audi as an example, (tags can be used to catagorize your data)
 **fieldKey**           name of the *_field* in InfluxDB
