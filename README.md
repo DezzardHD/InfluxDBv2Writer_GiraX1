@@ -13,9 +13,9 @@ Currently data of type *Number* or *Binary* is supported.
 6. Last but not least you'll have to configure each Input as followed:<br/>
 `measurementName,tagKey1=tagValue,tagKey2=tagValue,...,tagKeyX=tagValue fieldKey1,fieldKey2,...,fieldKeyX`
 <br/>
-measurementName :   choose name of the value for "_measurement"<br/>
-tagKey=tagValue :   car=audi as an example, (tags can be used to catagorize your data)<br/>
-fieldKey        :   name of the "_field" in InfluxDB<br/>
+**measurementName** :   choose name of the value for "_measurement"<br/>
+**tagKey=tagValue** :   car=audi as an example, (tags can be used to catagorize your data)
+**fieldKey**        :   name of the "_field" in InfluxDB
 
 For each "Input" you can write the same value to multiple _fields.
 You can assign multiple tags to the value of the field you are writing to.<br/>
