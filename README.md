@@ -10,12 +10,12 @@ Currently data of type *Number* or *Binary* is supported.
 3. Use a **Authetification Token** with *write access* to your *bucket*. (You can find/create tokens in the graphical UI of InfluxDB or using the [CLI](https://docs.influxdata.com/influxdb/v2.0/security/tokens/))
 4. Next to fill in is the name of the **bucket** you want to write the data to.
 5. Now specify the number of *Inputs* you want to use.
-6. Last but not least you'll have to configure each Input as followed:<br/>
+6. Last but not least you'll have to configure each Input as followed<br/>
 `measurementName,tagKey1=tagValue,tagKey2=tagValue,...,tagKeyX=tagValue fieldKey1,fieldKey2,...,fieldKeyX`
 <br/>
-**measurementName** :   choose name of the value for "_measurement"<br/>
-**tagKey=tagValue** :   car=audi as an example, (tags can be used to catagorize your data)
-**fieldKey**        :   name of the "_field" in InfluxDB
+**measurementName**    choose name of the value for *_measurement*<br/>
+**tagKey=tagValue**    car=audi as an example, (tags can be used to catagorize your data)
+**fieldKey**           name of the *_field* in InfluxDB
 
 For each "Input" you can write the same value to multiple _fields.
 You can assign multiple tags to the value of the field you are writing to.<br/>
