@@ -12,15 +12,15 @@ Currently data of type *Number* or *Binary* is supported.
 5. Now specify the number of *Inputs* you want to use.
 6. Last but not least you'll have to configure each Input as followed:<br/>
 `measurementName,tagKey1=tagValue,tagKey2=tagValue,...,tagKeyX=tagValue fieldKey1,fieldKey2,...,fieldKeyX`
-
-measurementName :   choose name of the value for "_measurement"
-tagKey=tagValue :   car=audi as an example, (tags can be used to catagorize your data)
-fieldKey        :   name of the "_field" in InfluxDB
+<br/>
+measurementName :   choose name of the value for "_measurement"<br/>
+tagKey=tagValue :   car=audi as an example, (tags can be used to catagorize your data)<br/>
+fieldKey        :   name of the "_field" in InfluxDB<br/>
 
 For each "Input" you can write the same value to multiple _fields.
-You can assign multiple tags to the value of the field you are writing to.
+You can assign multiple tags to the value of the field you are writing to.<br/>
 
-Example:
+Example:<br/>
 Tracking temperature in a house with bottom, middle and top floor and rooms which are labeled with numbers.
 When you want to write to InfluxDB, you'll have to choose/create a "bucket" to write to.
 e.g. bucket name = "temperatureBucket"
