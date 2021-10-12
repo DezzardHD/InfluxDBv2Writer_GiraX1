@@ -1,2 +1,10 @@
 # InfluxDBv2Writer_GiraX1
-Logic node for writing time series data to InfluxDB v2.0. This logic node can be used with [Gira X1](https://www.gira.de/produkte/lichtsteuerung/lichtsteuerung-per-app/gira-x1#) (Hardware).
+Logic node for writing time series data to [InfluxDB v2.0](https://docs.influxdata.com/influxdb/v2.0/) via [HTTP REST API v2.0](https://docs.influxdata.com/influxdb/v2.0/reference/api/). This logic node can be used with [Gira X1](https://www.gira.de/produkte/lichtsteuerung/lichtsteuerung-per-app/gira-x1#) (Hardware).
+
+## Supported Data Types
+Currently data of types *Number* and *Binary* is supported.
+
+# How to configure? (Gira Project Assistant)
+1. Fill in IP and Port of your InfluxDB Server.
+2. Use the organization name you had configured on your InfluxDB Server.
+3. Use a **Authetification Token** with *write access* to your bucket. (You can find/create tokens in the graphical UI of InfluxDB or using the [CLI](https://docs.influxdata.com/influxdb/v2.0/security/tokens/))
