@@ -1,0 +1,34 @@
+﻿{
+  "PackageFormatVersion": "1.0",
+  "Assembly": "moritz_franz_outlook_com.Logic.InfluxDBWriter.dll",
+  "PackageName": {
+    "en": "InfluxDBv2Writer",
+    "de": "InfluxDBv2Writer"
+  },
+  "DependentFiles": [
+    "LogicModule.Nodes.Helpers.dll"
+  ],
+  "Version": "0.5.1",
+  "Author": "DezzardHD",
+  "Copyright": "DezzardHD",
+  "DeveloperId": "moritz_franz_outlook_com",
+  "License": "Free",
+  "PackageId": "8841BA77-F2C5-449B-A34C-922C87F047F9",
+  "Nodes": [
+    {
+      "Type": "moritz_franz_outlook_com.Logic.InfluxDBWriter.InfluxDBv2Writer",
+      "Name": {
+        "en": "InfluxDBv2 Writer",
+        "de": "InfluxDBv2 Writer"
+      },
+      "IsConverter": false,
+      "Category": "Node",
+      "DefaultIcon": "logo.jpg",
+      "HelpTooltip": {
+        "en": "Writes to InfluxDB v2.0 using \"InfluxDB v2.0 REST API\". Support for Number and Binary values types.",
+        "de": "Schreibt Werte in InfluxDB v2.0 mithilfe der \"InfluxDB v2.0 REST API\". Unterstütz Number und Binary Werttypen."
+      },
+      "HelpFileReference": null
+    }
+  ]
+}
