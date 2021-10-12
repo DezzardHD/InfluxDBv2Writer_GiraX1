@@ -11,4 +11,4 @@ Currently data of type *Number* or *Binary* is supported.
 4. Next to fill in is the name of the **bucket** you want to write the data to.
 5. Now specify the number of *Inputs* you want to use.
 6. Last but not least you'll have to configure each Input as followed:
-  `is this a quote?`
+`is this a quote?`
