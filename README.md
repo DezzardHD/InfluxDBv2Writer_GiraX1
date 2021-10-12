@@ -14,18 +14,18 @@ Currently data of type *Number* or *Binary* is supported.
 `measurementName,tagKey1=tagValue,tagKey2=tagValue,...,tagKeyX=tagValue fieldKey1,fieldKey2,...,fieldKeyX`
 
 **measurementName**    choose name of the value for *_measurement*<br/>
-**tagKey=tagValue**    car=audi as an example, (tags can be used to catagorize your data)
-**fieldKey**           name of the *_field* in InfluxDB
+**tagKey=tagValue**    car=audi as an example, (tags can be used to catagorize your data)<br/>
+**fieldKey**           name of the *_field* in InfluxDB<br/>
 
-For each "Input" you can write the same value to multiple _fields.
+For each "Input" you can write the same value to multiple _fields.<br/>
 You can assign multiple tags to the value of the field you are writing to.<br/>
 
 Example:<br/>
-Tracking temperature in a house with bottom, middle and top floor and rooms which are labeled with numbers.
-When you want to write to InfluxDB, you'll have to choose/create a "bucket" to write to.
-e.g. bucket name = "temperatureBucket"
-Assigning the temperature values to Input 1 you'll have to configure "Config 1" as follows:
+Tracking temperature in a house with bottom, middle and top floor and rooms which are labeled with numbers.<br/>
+When you want to write to InfluxDB, you'll have to choose/create a "bucket" to write to.<br/>
+e.g. bucket name = "temperatureBucket"<br/>
+Assigning the temperature values to Input 1 you'll have to configure "Config 1" as follows:<br/>
 `temperatureBucket,floor=bottomFloor,room=roomNumber42 temperatureInFarad`
 
-With the above configuration of Input 1 you'll send temperature data of the bottom floor of room 42 to InfluxDB's bucket "temperatureBucket".
+With the above configuration of Input 1 you'll send temperature data of the bottom floor of room 42 to InfluxDB's bucket "temperatureBucket".<br/>
 The value is written to field-value "temperatureInFarad"
