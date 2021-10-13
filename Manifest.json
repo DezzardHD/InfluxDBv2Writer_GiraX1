@@ -8,7 +8,7 @@
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
-  "Version": "0.5.1",
+  "Version": "1.0.0",
   "Author": "DezzardHD",
   "Copyright": "DezzardHD",
   "DeveloperId": "moritz_franz_outlook_com",
@@ -23,7 +23,7 @@
       },
       "IsConverter": false,
       "Category": "Node",
-      "DefaultIcon": "logo.jpg",
+      "DefaultIcon": "logo.png",
       "HelpTooltip": {
         "en": "Writes to InfluxDB v2.0 using \"InfluxDB v2.0 REST API\". Support for Number and Binary values types.",
         "de": "Schreibt Werte in InfluxDB v2.0 mithilfe der \"InfluxDB v2.0 REST API\". Unterstütz Number und Binary Werttypen."

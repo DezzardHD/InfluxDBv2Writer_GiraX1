@@ -3,13 +3,11 @@ using LogicModule.ObjectModel;
 using LogicModule.ObjectModel.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
-using Vibrant.InfluxDB.Client;
-using Vibrant.InfluxDB.Client.Rows;
 
 namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
 {
@@ -52,11 +50,6 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
         /// URL used to write to InfluxDB. Getting initialized at "start-up" of the logic-node.
         /// </summary>
         private String URL;
-        
-        /// <summary>
-        /// client used to write to InfluxDB. Getting initialized at "start-up" of the logic-node.
-        /// </summary>
-        private HttpWebRequest client;
 
         /// <summary>
         /// Constructor for logic-node "InfluxDBv2Writer".
@@ -86,7 +79,6 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
             this.Organization = this.typeService.CreateString(PortTypes.String, "Organization", "myInfluxdbOrganizationName");
 
             // Debugging Output
-            this.Output = typeService.CreateString(PortTypes.String, "Output", "Debugging");
             this.ErrorCode = typeService.CreateInt(PortTypes.Integer, "HTTP status-code");
             this.ErrorMessage = typeService.CreateString(PortTypes.String, "SMTP User");
         }
@@ -126,8 +118,6 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
 
 
         // Debugging Outputs
-        [Output(DisplayOrder = 1, IsRequired = false, IsDefaultShown = false)]
-        public StringValueObject Output { get; private set; }
         [Output(DisplayOrder = 2, IsRequired = false, IsDefaultShown = false)]
         public IntValueObject ErrorCode { get; private set; }
         [Output(DisplayOrder = 3, IsRequired = false, IsDefaultShown = false)]
@@ -202,6 +192,11 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
         /// <param name="inputIndex"></param>
         public void WriteDatapointSync(Action<int?, string> SetResultCallback,int inputIndex)
         {
+            HttpWebRequest client = (HttpWebRequest)HttpWebRequest.Create(new Uri(URL));
+            client.Headers.Add("Authorization", string.Format("Token {0}", this.AuthorizationToken.Value));
+            client.Method = "POST";
+            client.ContentType = "text/plain; charset=utf-8";
+
             String Body = buildBodyString(inputIndex);
             try
             {   
@@ -260,25 +255,30 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
             String fieldKeyValuePairsArray = " ";
             foreach (var fieldKey in fieldKeyArray)
             {
-                fieldKeyValuePairsArray += fieldKey + "=" + this.Inputs.ElementAt(inputIndex).Value + ",";
+                object fieldValue = this.Inputs.ElementAt(inputIndex).Value;
+                string fieldValueString = "";
+                if (fieldValue is double)
+                {
+                    fieldValueString = fieldValue.ToString().Replace(",",".");
+                }
+                else
+                {
+                    fieldValueString = fieldValue.ToString();
+                }
+                fieldKeyValuePairsArray += fieldKey + "=" + fieldValueString + ",";
             }
             return splittedConfigStringArray[0] + fieldKeyValuePairsArray.Remove(fieldKeyValuePairsArray.Length - 1);
         }
 
         /// <summary>
         /// This function is called only once when the logic page is being loaded.
-        /// Initializes HTTP-client for writing to InfluxDB.
         /// Initializes Inputs so that values are being written to InfluxDB, even if not all Input has been active.
         /// </summary>
         public override void Startup()
         {
-            // configure Http-Request
+            // configure URL for Http-Request
             this.URL = "http://" + this.IP.Value + ":" + this.Port.Value + "/api/v2/write?org=" + this.Organization.Value + "&bucket=" + this.Bucket.Value + "&precision=ms";
-            this.client = (HttpWebRequest)HttpWebRequest.Create(new Uri(URL));
-            client.Headers.Add("Authorization", string.Format("Token {0}", this.AuthorizationToken.Value));
-            client.Method = "POST";
-            client.ContentType = "text/plain; charset=utf-8";
-
+            
             // initialize every Input so that the incoming values can be written, even if not every Input received an value
             base.Startup();
             foreach(var gpaInput in this.Inputs)
