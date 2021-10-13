@@ -31,3 +31,5 @@ Assigning the temperature values to Input 1 you'll have to configure "Config 1" 
 
 With the above configuration of Input 1 you'll send temperature data of the bottom floor of room 42 to InfluxDB's bucket "temperatureBucket".<br/>
 The value is written to field-value "temperatureInFarad"
+
+![myText](GPA.png)
