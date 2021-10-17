@@ -1,6 +1,6 @@
 # InfluxDBv2Writer_GiraX1
 Logic node for writing time series data to [InfluxDB v2.0](https://docs.influxdata.com/influxdb/v2.0/) via [HTTP REST API v2.0](https://docs.influxdata.com/influxdb/v2.0/reference/api/). This logic node can be used with [Gira X1](https://www.gira.de/produkte/lichtsteuerung/lichtsteuerung-per-app/gira-x1#) (Hardware).<br/>
-Credits to [Alram Lechner](https://github.com/alramlechner/CommonLogicNodes/tree/master/InfluxDbNode) for his HTTP Post example.
+Credit to [Alram Lechner](https://github.com/alramlechner/CommonLogicNodes/tree/master/InfluxDbNode) for his HTTP Post example.
 
 ## Supported Data Types
 Currently data of type *Number* or *Binary* is supported.
