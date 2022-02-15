@@ -45,4 +45,5 @@ With the above configuration of Input 1 you'll send temperature data of the bott
 The value is written to field-value "temperatureInFarad"<br/>
 ![InfluxDBGUI](InfluxDBGUI.png)<br/>
 ![GPA](GPA.png)
+![GPAcloud](GPAcloud.png)
 
