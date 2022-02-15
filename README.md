@@ -17,7 +17,7 @@ Continue with the steps in "Write to InfluxDB using IP+Port"
 ## Write to InfluxDB using IP+Port
 **!!! The text field "InfluxDB Cloud URL" has to be empty. !!!**
 
-1. Fill in IP and Port of your InfluxDB Server.
+1. Fill in IP and Port of your InfluxDB Server. (ignore when using cloud)
 2. Use the organization name you had configured on your InfluxDB Server.
 3. Use a **Authetification Token** with *write access* to your *bucket*. (You can find/create tokens in the graphical UI of InfluxDB or using the [CLI](https://docs.influxdata.com/influxdb/v2.0/security/tokens/))
 4. Next to fill in is the name of the **bucket** you want to write the data to.
