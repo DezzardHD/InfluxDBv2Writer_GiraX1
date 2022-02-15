@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 
+
+
 namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
 {
     /// <summary>
@@ -74,9 +76,10 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
 
             this.IP = this.typeService.CreateString(PortTypes.String, "IP of InfluxDB", "127.0.0.1");
             this.Port = this.typeService.CreateString(PortTypes.String, "Port of InfluxDB", "8086");
+            this.CloudURL = this.typeService.CreateString(PortTypes.String, "InfluxDB Cloud URL (https:// ... .com)", "");
             this.AuthorizationToken = this.typeService.CreateString(PortTypes.String, "Authorization Token", "TokenWithWriteAccess");
             this.Bucket = this.typeService.CreateString(PortTypes.String, "Bucket name", "myInfluxdbBucketName");
-            this.Organization = this.typeService.CreateString(PortTypes.String, "Organization", "myInfluxdbOrganizationName");
+            this.Organization = this.typeService.CreateString(PortTypes.String, "Organization", "myInfluxdbOrganizationName/orgID");
 
             // Debugging Output
             this.ErrorCode = typeService.CreateInt(PortTypes.Integer, "HTTP status-code");
@@ -92,28 +95,32 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
         [Parameter(DisplayOrder = 2, InitOrder = 2, IsDefaultShown = false, IsRequired = true)]
         public StringValueObject Port { get; private set; }
 
+        // HTTPS-address and port for connecting to influxdb
+        [Parameter(DisplayOrder = 3, InitOrder = 3, IsDefaultShown = false, IsRequired = false)]
+        public StringValueObject CloudURL { get; private set; }
+
         // InfluxDb organization name
-        [Parameter(DisplayOrder = 3, InitOrder = 3, IsDefaultShown = false, IsRequired = true)]
+        [Parameter(DisplayOrder = 4, InitOrder = 4, IsDefaultShown = false, IsRequired = true)]
         public StringValueObject Organization { get; private set; }
 
         // InfluxDb token for authorization
-        [Parameter(DisplayOrder = 4, InitOrder = 4, IsDefaultShown = false, IsRequired = true)]
+        [Parameter(DisplayOrder = 5, InitOrder = 5, IsDefaultShown = false, IsRequired = true)]
         public StringValueObject AuthorizationToken { get; private set; }
 
         // InfluxDb bucket name
-        [Parameter(DisplayOrder = 5, InitOrder = 5, IsDefaultShown = true, IsRequired = true)]
+        [Parameter(DisplayOrder = 6, InitOrder = 6, IsDefaultShown = true, IsRequired = true)]
         public StringValueObject Bucket { get; private set; }
 
         // Number of Inputs
-        [Parameter(DisplayOrder = 6, InitOrder = 6, IsDefaultShown = false, IsRequired = true)]
+        [Parameter(DisplayOrder = 7, InitOrder = 7, IsDefaultShown = false, IsRequired = true)]
         public IntValueObject InputCount { get; private set; }
 
         // List of config text-fields
-        [Parameter(DisplayOrder = 7, InitOrder = 7, IsDefaultShown = false, IsRequired = false)]
+        [Parameter(DisplayOrder = 8, InitOrder = 8, IsDefaultShown = false, IsRequired = false)]
         public IList<StringValueObject> Configs { get; private set; }
 
         // List of input text-fields
-        [Input(DisplayOrder = 8, InitOrder = 8, IsRequired = false)]
+        [Input(DisplayOrder = 8, InitOrder = 9, IsRequired = false)]
         public IList<AnyValueObject> Inputs { get; private set; }
 
 
@@ -190,7 +197,7 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
         /// </summary>
         /// <param name="SetResultCallback"></param>
         /// <param name="inputIndex"></param>
-        public void WriteDatapointSync(Action<int?, string> SetResultCallback,int inputIndex)
+        public void WriteDatapointSync(Action<int?, string> SetResultCallback, int inputIndex)
         {
             HttpWebRequest client = (HttpWebRequest)HttpWebRequest.Create(new Uri(URL));
             client.Headers.Add("Authorization", string.Format("Token {0}", this.AuthorizationToken.Value));
@@ -199,7 +206,7 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
 
             String Body = buildBodyString(inputIndex);
             try
-            {   
+            {
                 using (var request = client.GetRequestStream())
                 {
                     using (var writer = new StreamWriter(request))
@@ -238,6 +245,7 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
                 return;
             }
         }
+     
 
         /// <summary>
         /// Builds string suitable for InfluxDBv2 API using the information of config.
@@ -276,9 +284,18 @@ namespace moritz_franz_outlook_com.Logic.InfluxDBWriter
         /// </summary>
         public override void Startup()
         {
-            // configure URL for Http-Request
-            this.URL = "http://" + this.IP.Value + ":" + this.Port.Value + "/api/v2/write?org=" + this.Organization.Value + "&bucket=" + this.Bucket.Value + "&precision=ms";
-            
+            if (this.CloudURL.Value.Equals(""))
+            {
+                // configure URL for Http-Request
+                this.URL = "http://" + this.IP.Value + ":" + this.Port.Value + "/api/v2/write?org=" + this.Organization.Value + "&bucket=" + this.Bucket.Value + "&precision=ms";
+            }
+            else
+            {
+                // configure URL for sending data to InfluxDB Cloud
+                this.URL = this.CloudURL.Value + "/api/v2/write?org=" + this.Organization.Value + "&bucket=" + this.Bucket.Value + "&precision=ms";
+
+            }
+
             // initialize every Input so that the incoming values can be written, even if not every Input received an value
             base.Startup();
             foreach(var gpaInput in this.Inputs)
