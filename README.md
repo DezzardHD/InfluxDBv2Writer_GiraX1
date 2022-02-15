@@ -5,6 +5,9 @@ Credit to [Alram Lechner](https://github.com/alramlechner/CommonLogicNodes/tree/
 ## Supported Data Types
 Currently data of type *Number* or *Binary* is supported.
 
+## Download
+[Download InfluxDBv2Writer](http://service.knx-user-forum.de/?comm=download&id=20000080)
+
 # How to configure? (Gira Project Assistant)
 
 ## Write to InfluxDB Cloud
