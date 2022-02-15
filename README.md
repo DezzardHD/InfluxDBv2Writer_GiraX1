@@ -8,10 +8,10 @@ Currently data of type *Number* or *Binary* is supported.
 # How to configure? (Gira Project Assistant)
 
 ## Write to InfluxDB Cloud
-The text field "InfluxDB Cloud URL" should contain the URL to the Cloud server.
+The text field "InfluxDB Cloud URL" should contain the URL to the Cloud server (so called "Cluster URL").
 The URL should start with https:// and end with .com
 Something like this:
-https://europe-west1-1.gcp.cloud2.influxdata.com
+https://europe-west1-1.gcp.cloud2.influxdata.com.
 Continue with the steps in "Write to InfluxDB using IP+Port"
 
 ## Write to InfluxDB using IP+Port
