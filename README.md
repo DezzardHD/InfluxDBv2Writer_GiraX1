@@ -5,6 +5,9 @@ Credit to [Alram Lechner](https://github.com/alramlechner/CommonLogicNodes/tree/
 ## Supported Data Types
 Currently data of type *Number* or *Binary* is supported.
 
+## Download
+[Download InfluxDBv2Writer](http://service.knx-user-forum.de/?comm=download&id=20000080)
+
 # How to configure? (Gira Project Assistant)
 1. Fill in IP and Port of your InfluxDB Server.
 2. Use the organization name you had configured on your InfluxDB Server.
@@ -34,4 +37,4 @@ With the above configuration of Input 1 you'll send temperature data of the bott
 The value is written to field-value "temperatureInFarad"<br/>
 ![InfluxDBGUI](InfluxDBGUI.png)<br/>
 ![GPA](GPA.png)
-
+![GPAcloud](GPAcloud.png)
